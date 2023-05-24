@@ -10,6 +10,8 @@ The model architecture comprises an encoder and a decoder. The encoder processes
 
 Global attention allows the decoder to attend to all parts of the encoded German sentence, dynamically weighting the importance of each word or phrase. This mechanism helps the model align relevant information across source and target sentences.
 
+### To know more about the attention mechanism refer to -Effective Approaches to Attention-based Neural Machine Translation- https://aclanthology.org/D15-1166/
+
 In addition, we incorporate local attention, which focuses on a narrower context window within the encoded German sentence. This enables the model to place emphasis on specific regions of interest while generating the English translation. By utilizing both global and local attention, the model can improve translation accuracy and fluency.
 
 
