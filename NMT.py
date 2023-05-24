@@ -1125,33 +1125,33 @@ for i,sent in tqdm(enumerate(test_english_tensors)):
 
 
 
-# bleu_1_scores = []
-# bleu_2_scores = []
-# rouge_l_scores = []
+bleu_1_scores = []
+bleu_2_scores = []
+rouge_l_scores = []
 
-# # initialize rouge and bleu scorers
-# rouge = Rouge()
-# bleu = nltk.translate.bleu_score.SmoothingFunction()
+# initialize rouge and bleu scorers
+rouge = Rouge()
+bleu = nltk.translate.bleu_score.SmoothingFunction()
 
-# # iterate over each sentence in the reference and generated lists
-# for ref_sent, gen_sent in zip(test_data_original, test_data_prediction):
-#     # compute bleu scores for n-grams of length 1 and 2
-#     bleu_1 = sentence_bleu([ref_sent.split()], gen_sent.split(), weights=(1, 0, 0), smoothing_function=bleu.method1)
-#     bleu_2 = sentence_bleu([ref_sent.split()], gen_sent.split(), weights=(0.5, 0.5, 0), smoothing_function=bleu.method1)
+# iterate over each sentence in the reference and generated lists
+for ref_sent, gen_sent in zip(test_data_original, test_data_prediction):
+    # compute bleu scores for n-grams of length 1 and 2
+    bleu_1 = sentence_bleu([ref_sent.split()], gen_sent.split(), weights=(1, 0, 0), smoothing_function=bleu.method1)
+    bleu_2 = sentence_bleu([ref_sent.split()], gen_sent.split(), weights=(0.5, 0.5, 0), smoothing_function=bleu.method1)
     
-#     # compute rouge-l score
-#     scores = rouge.get_scores(gen_sent, ref_sent)[0]
-#     rouge_l = scores['rouge-l']['f']
+    # compute rouge-l score
+    scores = rouge.get_scores(gen_sent, ref_sent)[0]
+    rouge_l = scores['rouge-l']['f']
     
-#     # add individual scores to lists
-#     bleu_1_scores.append(bleu_1)
-#     bleu_2_scores.append(bleu_2)
-#     rouge_l_scores.append(rouge_l)
+    # add individual scores to lists
+    bleu_1_scores.append(bleu_1)
+    bleu_2_scores.append(bleu_2)
+    rouge_l_scores.append(rouge_l)
 
-# # compute overall scores as average of individual scores
-# avg_bleu_1 = sum(bleu_1_scores) / len(bleu_1_scores)
-# avg_bleu_2 = sum(bleu_2_scores) / len(bleu_2_scores)
-# avg_rouge_l = sum(rouge_l_scores) / len(rouge_l_scores)
+# compute overall scores as average of individual scores
+avg_bleu_1 = sum(bleu_1_scores) / len(bleu_1_scores)
+avg_bleu_2 = sum(bleu_2_scores) / len(bleu_2_scores)
+avg_rouge_l = sum(rouge_l_scores) / len(rouge_l_scores)
 
 print(f'Bleu-1 score: {avg_bleu_1:.4f}')
 print(f'Bleu-2 score: {avg_bleu_2:.4f}')
